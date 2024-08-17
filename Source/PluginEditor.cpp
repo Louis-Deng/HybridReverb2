@@ -101,11 +101,11 @@ HybridrevjoAudioProcessorEditor::HybridrevjoAudioProcessorEditor
     
     preFilterSwitch.setClickingTogglesState(true);
     preFilterSwitch.setBounds(20, 290, 80, 40 );
-    preFilterSwitch.setImages(false,true,true,
-                              img_LP,0.85f,juce::Colours::transparentWhite,         //up
-                              juce::Image(),0.85f,juce::Colours::transparentWhite,  //hover
-                              img_HP,0.85f,juce::Colours::transparentWhite          //down
-                              );
+//    preFilterSwitch.setImages(false,true,true,
+//                              img_LP,0.85f,juce::Colours::transparentWhite,         //up
+//                              juce::Image(),0.85f,juce::Colours::transparentWhite,  //hover
+//                              img_HP,0.85f,juce::Colours::transparentWhite          //down
+//                              );
     
     preFilterSwitch.addListener(this);
     preFilterSwitchAtt.reset (new ButtonAttachment (valueTreeState, "01-prefilt", preFilterSwitch));
@@ -121,56 +121,6 @@ HybridrevjoAudioProcessorEditor::HybridrevjoAudioProcessorEditor
     dampSet.addListener(this);
     dampSetAtt.reset (new SliderAttachment (valueTreeState, "05-damping", dampSet));
     
-    // Add LBCF sub components
-    /*
-    int xPosNow = 340;  //starting array of lbcf componenets
-    int xWidthP = 40;   //increment each next array lbcf componenets
-    for (int i=0;i<16;i++)
-    {
-        addAndMakeVisible(&lbcfFreq[i]);
-        lbcfFreq[i].setSliderStyle(juce::Slider::LinearBarVertical);
-        lbcfFreq[i].setBounds(xPosNow, 80, xWidthP, 120);
-        lbcfFreq[i].setTextBoxStyle(juce::Slider::TextBoxAbove, true, 0, 0);
-        lbcfFreq[i].setRange(20.0f, 20000.0f);
-        lbcfFreq[i].setNumDecimalPlacesToDisplay(0);
-        
-        lbcfFreq[i].addListener(this);
-        //default: depends
-        
-        
-        addAndMakeVisible(&lbcfReso[i]);
-        lbcfReso[i].setSliderStyle(juce::Slider::RotaryVerticalDrag);
-        lbcfReso[i].setBounds(xPosNow, 220, xWidthP, xWidthP+36);
-        lbcfReso[i].setTextBoxStyle(juce::Slider::TextBoxAbove, true, xWidthP, 16);
-        lbcfReso[i].setNumDecimalPlacesToDisplay(2);
-        lbcfReso[i].setRange(0.01f,10.0f);
-        lbcfReso[i].setSkewFactor(0.333f);
-        
-        lbcfReso[i].addListener(this);
-        //default: 1.0
-        
-        
-        addAndMakeVisible(&lbcfFtyp[i]);
-        lbcfFtyp[i].setSliderStyle(juce::Slider::LinearHorizontal);
-        lbcfFtyp[i].setBounds(xPosNow, 320, xWidthP, xWidthP);
-        lbcfFtyp[i].setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
-        lbcfFtyp[i].setRange(0.0f,3.f,1.0f);    //third arg is step-size
-        
-        lbcfFtyp[i].addListener(this);
-        //default: 0.0
-        
-        addAndMakeVisible(&lbcfFtypInd[i]);
-        lbcfFtypInd[i].setImage(img_FiltSwitch);
-        lbcfFtypInd[i].setBoundingBox(juce::Rectangle<float>((float)xPosNow, 320.0f, (float)xWidthP, 20.0f));
-        addAndMakeVisible(&lbcfFtypImg[i]);
-        lbcfFtypImg[i].setBoundingBox(juce::Rectangle<float>((float)xPosNow, 360.0f, (float)xWidthP, 30.0f));
-        ////////////////////////////////// WTF THIS DOESNT WORK
-        // increment xpos with width
-        xPosNow += xWidthP;
-        // increment xpos with gap of x?
-        xPosNow += 8;
-    }
-     */
 }
 
 HybridrevjoAudioProcessorEditor::~HybridrevjoAudioProcessorEditor()
@@ -225,31 +175,6 @@ void HybridrevjoAudioProcessorEditor::sliderValueChanged(juce::Slider* subject)
         audioProcessor.mLatRev[1]->changeDamping(dampSet.getValue());
     }
     
-    /*
-    /// lbcf loop
-    for (int i=0;i<16;i++)
-    {
-        if (subject == &lbcfFreq[i]){
-            
-        }else if(subject == &lbcfReso[i]){
-            
-        }else if(subject == &lbcfFtyp[i]){
-            //since setImage() overrides the boundingbox for drawableImage, retrieve a temporary boundingBox here and apply later
-            auto tmpBox = lbcfFtypImg[i].getBoundingBox();
-            if (lbcfFtyp[i].getValue() == 0.0f){
-                lbcfFtypImg[i].setImage(img_XF);
-            }else if(lbcfFtyp[i].getValue() == 1.0f){
-                lbcfFtypImg[i].setImage(img_LP);
-            }else if(lbcfFtyp[i].getValue() == 2.0f){
-                lbcfFtypImg[i].setImage(img_BP);
-            }else if(lbcfFtyp[i].getValue() == 3.0f){
-                lbcfFtypImg[i].setImage(img_HP);
-            }
-            //apply the same bounding box that was set in initialization
-            lbcfFtypImg[i].setBoundingBox(tmpBox);
-        }
-    }
-     */
 }
 
 void HybridrevjoAudioProcessorEditor::comboBoxChanged(juce::ComboBox* subject)

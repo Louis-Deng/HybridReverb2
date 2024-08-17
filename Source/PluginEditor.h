@@ -67,12 +67,12 @@ private:
     std::unique_ptr<SliderAttachment> modSpdAtt;
     
     //image resources to be loaded and kept
-    const juce::Image img_XF = juce::ImageCache::getFromMemory(BinaryData::OFFFilter_png, BinaryData::OFFFilter_pngSize);
-    const juce::Image img_LP = juce::ImageCache::getFromMemory(BinaryData::LPFilter_png, BinaryData::LPFilter_pngSize);
-    const juce::Image img_HP = juce::ImageCache::getFromMemory(BinaryData::HPFilter_png, BinaryData::HPFilter_pngSize);
-    const juce::Image img_BP = juce::ImageCache::getFromMemory(BinaryData::BPFilter_png, BinaryData::BPFilter_pngSize);
+    //const juce::Image img_XF = juce::ImageCache::getFromMemory(BinaryData::OFFFilter_png, BinaryData::OFFFilter_pngSize);
+    //const juce::Image img_LP = juce::ImageCache::getFromMemory(BinaryData::LPFilter_png, BinaryData::LPFilter_pngSize);
+    //const juce::Image img_HP = juce::ImageCache::getFromMemory(BinaryData::HPFilter_png, BinaryData::HPFilter_pngSize);
+    //const juce::Image img_BP = juce::ImageCache::getFromMemory(BinaryData::BPFilter_png, BinaryData::BPFilter_pngSize);
     
-    const juce::Image img_FiltSwitch = juce::ImageCache::getFromMemory(BinaryData::FilterSwitch_png, BinaryData::FilterSwitch_pngSize);
+    //const juce::Image img_FiltSwitch = juce::ImageCache::getFromMemory(BinaryData::FilterSwitch_png, BinaryData::FilterSwitch_pngSize);
     
     /// preFiltering toggle switch
     juce::ImageButton preFilterSwitch;

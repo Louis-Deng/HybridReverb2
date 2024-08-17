@@ -3,7 +3,7 @@
 
     FilterIntegration.h
  
-    It's a sample-wise biquad filter function in Juce
+    Manages a sample-wise biquad filter function in Juce
     
     manages mono sample wise processing
  
