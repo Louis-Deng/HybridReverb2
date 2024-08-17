@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="CqxqDj" name="hybridrevjo" projectType="audioplug" useAppConfig="1"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              companyName="LouisDeng" companyWebsite="https://github.com/Louis-Deng"
+              pluginFormats="buildAAX,buildAU,buildVST3" pluginAUMainType="'aufx'"
+              pluginVST3Category="Fx,Reverb,Stereo" pluginAAXCategory="8,8192"
+              pluginVSTCategory="kPlugCategEffect" maxBinaryFileSize="20971520"
+              pluginName="Rebirberator 2" pluginCode="Hrb2" pluginManufacturerCode="Lbdx"
+              version="2.05" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
+  <MAINGROUP id="zECeUI" name="hybridrevjo">
+    <GROUP id="{A3727F7F-C474-E93B-BF15-FE140D277FBD}" name="MISC">
+      <FILE id="tkA1LD" name="Notes" compile="0" resource="1" file="Notes"/>
+    </GROUP>
+    <GROUP id="{8D74D7EC-7141-0F54-6FE6-78E4AECD1FDA}" name="Resources">
+      <GROUP id="{A419C2D6-24E3-71FF-6F3A-EA7DCDB5D508}" name="Audio">
+        <FILE id="T29jvx" name="aula.wav" compile="0" resource="1" file="Source/aula.wav"/>
+        <FILE id="Dt7irG" name="lecture.wav" compile="0" resource="1" file="Source/lecture.wav"/>
+        <FILE id="ikGaRE" name="meeting.wav" compile="0" resource="1" file="Source/meeting.wav"/>
+        <FILE id="QCjWsn" name="office.wav" compile="0" resource="1" file="Source/office.wav"/>
+        <FILE id="bl1qmU" name="stair.wav" compile="0" resource="1" file="Source/stair.wav"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{D871AA6D-03AF-45FF-0961-3E6D48517268}" name="LBD_gui">
+      <FILE id="A3ewNi" name="LBDCustomGUI.h" compile="0" resource="0" file="Source/LBDCustomGUI.h"/>
+    </GROUP>
+    <GROUP id="{E495BB3A-D468-E30D-F5C5-198ADE85E04A}" name="LBD_dsp">
+      <FILE id="vi3hTZ" name="AmpMod.h" compile="0" resource="0" file="Source/AmpMod.h"/>
+      <FILE id="F3woCB" name="BiquadCombChannel.h" compile="0" resource="0"
+            file="Source/BiquadCombChannel.h" xcodeResource="0"/>
+      <FILE id="hEkCCY" name="ConvolutionManager.h" compile="0" resource="0"
+            file="Source/ConvolutionManager.h"/>
+      <FILE id="gu8Igs" name="DWmixer.h" compile="0" resource="0" file="Source/DWmixer.h"/>
+      <FILE id="n0iJVW" name="FilterIntegration.h" compile="0" resource="0"
+            file="Source/FilterIntegration.h"/>
+      <FILE id="tyGV5n" name="LateReverbManager.h" compile="0" resource="0"
+            file="Source/LateReverbManager.h"/>
+      <FILE id="WWrHAb" name="MatrixOps.h" compile="0" resource="0" file="Source/MatrixOps.h"/>
+      <FILE id="MhtHJ8" name="PrimeUtil.h" compile="0" resource="0" file="Source/PrimeUtil.h"/>
+      <FILE id="FWTINd" name="SchroederAPLine.h" compile="0" resource="0"
+            file="Source/SchroederAPLine.h"/>
+    </GROUP>
+    <GROUP id="{CB5125CB-D144-4860-6544-AD397705556E}" name="Source">
+      <FILE id="BkJYD3" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="PrRIf6" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="arn3Re" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="a5jiqh" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_analytics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" xcodeValidArchs="arm64,arm64e,x86_64">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="hybridrevjo" osxArchitecture="Native"
+                       codeSigningIdentity="&quot;&quot;"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="hybridrevjo" osxArchitecture="Native"
+                       codeSigningIdentity="&quot;&quot;"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_analytics" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../JUCE/modules/juce_dsp"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../../Documents/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+</JUCERPROJECT>
