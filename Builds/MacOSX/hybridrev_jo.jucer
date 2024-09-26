@@ -7,7 +7,7 @@
               pluginVST3Category="Fx,Reverb,Stereo" pluginAAXCategory="8,8192"
               pluginVSTCategory="kPlugCategEffect" maxBinaryFileSize="20971520"
               pluginName="Rebirberator 2" pluginCode="Hrb2" pluginManufacturerCode="Lbdx"
-              version="2.11" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
+              version="2.05" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
   <MAINGROUP id="zECeUI" name="hybridrevjo">
     <GROUP id="{A3727F7F-C474-E93B-BF15-FE140D277FBD}" name="MISC">
       <FILE id="tkA1LD" name="Notes" compile="0" resource="1" file="Notes"/>
@@ -22,8 +22,7 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D871AA6D-03AF-45FF-0961-3E6D48517268}" name="LBD_gui">
-      <FILE id="tiWEn8" name="FreqAnalyzer.h" compile="0" resource="0" file="Source/FreqAnalyzer.h"/>
-      <FILE id="mqoyu5" name="SpectrumUtil.h" compile="0" resource="0" file="Source/SpectrumUtil.h"/>
+      <FILE id="A3ewNi" name="LBDCustomGUI.h" compile="0" resource="0" file="Source/LBDCustomGUI.h"/>
     </GROUP>
     <GROUP id="{E495BB3A-D468-E30D-F5C5-198ADE85E04A}" name="LBD_dsp">
       <FILE id="vi3hTZ" name="AmpMod.h" compile="0" resource="0" file="Source/AmpMod.h"/>
@@ -59,8 +58,6 @@
     <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
             useGlobalPath="1"/>
     <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_audio_processors_headless" showAllCode="1" useLocalCopy="0"
-            useGlobalPath="1"/>
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -72,8 +69,7 @@
   </MODULES>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" xcodeValidArchs="arm64,arm64e,x86_64"
-               keepCustomXcodeSchemes="1">
+    <XCODE_MAC targetFolder="Builds/MacOSX" xcodeValidArchs="arm64,arm64e,x86_64">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="hybridrevjo" osxArchitecture="Native"
                        codeSigningIdentity="&quot;&quot;"/>
@@ -95,7 +91,6 @@
         <MODULEPATH id="juce_audio_plugin_client" path="../../../../../Documents/JUCE/modules"/>
         <MODULEPATH id="juce_audio_utils" path="../../../../../Documents/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
-        <MODULEPATH id="juce_audio_processors_headless" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>

@@ -63,6 +63,9 @@ public:
     std::unique_ptr< LateReverbManager<double> > mLatRev[2];
     
     std::unique_ptr< DWmixer<double> > mDWM[2];
+    
+    std::shared_ptr< FreqAnalyzer > freqAnalyzer;
+    
     //==============================================================================
     
 private:

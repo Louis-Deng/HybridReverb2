@@ -73,16 +73,27 @@ HybridrevjoAudioProcessor::HybridrevjoAudioProcessor()
                        )
 #endif*/
 {
-    // init late reverb manager
-    mFI[0].reset(new FilterIntegration<double>);
-    mFI[1].reset(new FilterIntegration<double>);
-    mConMan.reset(new ConvolutionManager<float>);
-    mLatRev[0].reset(new LateReverbManager<double>);
-    mLatRev[1].reset(new LateReverbManager<double>);
-    // init dry/wet mixer
-    mDWM[0].reset(new DWmixer<double>);
-    mDWM[1].reset(new DWmixer<double>);
     
+    // init dual-channel convolution manager
+    mConMan.reset(new ConvolutionManager<float>);
+    // init freqAnalyzer
+    freqAnalyzer.reset(new FreqAnalyzer);
+       
+    // init both stereo channels
+    for (int ch=0;ch<2;ch++)
+    {
+        // init filter integration
+        mFI[ch].reset(new FilterIntegration<double>);
+        // init late reverb manager
+        mLatRev[ch].reset(new LateReverbManager<double>);
+        // init dry/wet mixer
+        mDWM[ch].reset( new DWmixer<double> );
+        
+        
+        //communicate just initialized FreqAnalyzer ptrs
+        mDWM[ch]->setid((uint32_t)ch);
+        mDWM[ch]->communicateFreqAnalyzerPtrs(freqAnalyzer);
+    }
 }
 
 HybridrevjoAudioProcessor::~HybridrevjoAudioProcessor()
@@ -256,7 +267,7 @@ void HybridrevjoAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         auto* channelDSP = buffer.getWritePointer(channel);
         
         // late reverberation
-        //mFI[channel]->processBuffer(channelDSP,buffer.getNumSamples());
+        //mFI[channel]->processBuffer(channelDSP,buffer.getNumSamples());   //prefiltering disabled for now
         mLatRev[channel]->processBuffer(channelDSP,buffer.getNumSamples());
         
         // dry wet mixer

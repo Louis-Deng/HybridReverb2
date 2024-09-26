@@ -18,7 +18,7 @@ HybridrevjoAudioProcessorEditor::HybridrevjoAudioProcessorEditor
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (660, 380);
+    setSize (660, 580); //y+200 to fit graphic window
     setResizable(false, false);
     
     // Add drop down menu
@@ -121,11 +121,20 @@ HybridrevjoAudioProcessorEditor::HybridrevjoAudioProcessorEditor
     dampSet.addListener(this);
     dampSetAtt.reset (new SliderAttachment (valueTreeState, "05-damping", dampSet));
     
+    // Add graphic sub-section
+    //???.setBounds         (15, getHeight()-285, 630, 270);    // 15px margin on L,R,Bottom
+    
 }
 
 HybridrevjoAudioProcessorEditor::~HybridrevjoAudioProcessorEditor()
 {
 }
+//==============================================================================
+void spectrogramPaint (std::vector<float> dbVector)
+{
+    
+}
+
 
 //==============================================================================
 void HybridrevjoAudioProcessorEditor::paint (juce::Graphics& g)
@@ -136,7 +145,12 @@ void HybridrevjoAudioProcessorEditor::paint (juce::Graphics& g)
     g.setColour (juce::Colours::grey);
     g.setFont (15.0f);
     g.drawFittedText ("LouisHybridReverb " + juce::String(ProjectInfo::versionString), getLocalBounds(), juce::Justification::topLeft, 1);
-    g.drawFittedText ("Advanced Parameters: ", getLocalBounds(), juce::Justification::topRight, 1);
+    g.drawFittedText ("Advanced Parameters:               ", getLocalBounds(), juce::Justification::topRight, 1);
+    
+    // graphic sub-section
+    juce::Rectangle<int> rectArea (15, getHeight()-285, 630, 270);
+    g.setColour(juce::Colours::black);
+    g.fillRect(rectArea);
     
 }
 
