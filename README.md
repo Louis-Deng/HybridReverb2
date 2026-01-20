@@ -21,3 +21,4 @@ stripped unnecessary code, prefiltering button removed for further refinement (d
 AU effect plugin
 supports mono->mono, mono->stereo, stereo->stereo channel configuration
 supports native arm64, intel64 buildable
+2026: added ParameterManager support to initialize parameter without UI

@@ -15,8 +15,8 @@
 #include "PrimeUtil.h"
 #include "MatrixOps.h"
 
-#define MATDIM 16
-#define APCASC 4
+#define MATDIM 16   // matrix dimension
+#define APCASC 4    // all-pass filter cascades
 
 template <typename SignalType>
 class LateReverbManager
@@ -46,6 +46,7 @@ public:
             apCH[i]->setSamplingRate(samplingRate);
         }
         fs_ = samplingRate;
+        fs_scale_ = samplingRate/48e3f;
         //pArr.setFS(fs_);
     }
     
@@ -187,13 +188,25 @@ public:
             //DBG("set LBCF channel with LP = " + juce::String(baseLPfreq_*pow(10,biasLPexponents_[i])));
             //if (i%2==0) lbcfCH[i]->injectBiquadFreq(baseLPfreq_,1);
             //if (i%2==1) lbcfCH[i]->injectBiquadFreq(baseLPfreq_,2);
-            lbcfCH[i]->injectBiquadFreq(baseLPfreq_*pow(10,biasLPexponents_[i]),1);
+            
+            // clamp the base LP freq with tilt based on actual SR vs 48000Hz
+            float specificLPfreq = baseLPfreq_*pow(10,biasLPexponents_[i])*fs_scale_;
+            
+            //DBG
+            if (specificLPfreq > fs_/2.0f)
+            {
+                DBG("damping filter freq calculated to be above nyquist! minimizing it 8 fold!");
+                specificLPfreq /= 8.0f;
+            }
+            
+            lbcfCH[i]->injectBiquadFreq(specificLPfreq,1);
         }
     }
     
 private:
     // basics
     float fs_;
+    float fs_scale_; // for tilting the damping biquad frequency
     SignalType outSamp_ = 0.0f;
     
     // util

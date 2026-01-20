@@ -1,15 +1,8 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "FreqAnalyzer.h"
 
 //==============================================================================
 /**
@@ -19,7 +12,8 @@ class HybridrevjoAudioProcessorEditor : public juce::AudioProcessorEditor, publi
 public:
     HybridrevjoAudioProcessorEditor (HybridrevjoAudioProcessor&, juce::AudioProcessorValueTreeState&);
     ~HybridrevjoAudioProcessorEditor() override;
-
+    //==============================================================================
+    void spectrogramPaint (juce::Graphics& g);
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
@@ -83,7 +77,7 @@ private:
     juce::Slider dampSet;
     juce::Label dampSetLabel;
     std::unique_ptr<SliderAttachment> dampSetAtt;
-    
+        
     /// LBCF 16-channel
     /*
     juce::Slider lbcfFreq[16];

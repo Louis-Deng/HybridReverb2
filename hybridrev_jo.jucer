@@ -2,15 +2,15 @@
 
 <JUCERPROJECT id="CqxqDj" name="hybridrevjo" projectType="audioplug" useAppConfig="1"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              companyName="LouisDeng" companyWebsite="https://github.com/Louis-Deng"
+              companyName="Louis DSP" companyWebsite="https://github.com/Louis-Deng"
               pluginFormats="buildAAX,buildAU,buildVST3" pluginAUMainType="'aufx'"
               pluginVST3Category="Fx,Reverb,Stereo" pluginAAXCategory="8,8192"
               pluginVSTCategory="kPlugCategEffect" maxBinaryFileSize="20971520"
-              pluginName="Rebirberator 2" pluginCode="Hrb2" pluginManufacturerCode="Lbdx"
-              version="2.05" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
+              pluginName="Rebirberator 2" pluginCode="Hrb2" pluginManufacturerCode="LDSP"
+              version="2.21" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
   <MAINGROUP id="zECeUI" name="hybridrevjo">
     <GROUP id="{A3727F7F-C474-E93B-BF15-FE140D277FBD}" name="MISC">
-      <FILE id="tkA1LD" name="Notes" compile="0" resource="1" file="Notes"/>
+      <FILE id="Y5AA1N" name="Notes.md" compile="0" resource="1" file="Notes.md"/>
     </GROUP>
     <GROUP id="{8D74D7EC-7141-0F54-6FE6-78E4AECD1FDA}" name="Resources">
       <GROUP id="{A419C2D6-24E3-71FF-6F3A-EA7DCDB5D508}" name="Audio">
@@ -22,7 +22,8 @@
       </GROUP>
     </GROUP>
     <GROUP id="{D871AA6D-03AF-45FF-0961-3E6D48517268}" name="LBD_gui">
-      <FILE id="A3ewNi" name="LBDCustomGUI.h" compile="0" resource="0" file="Source/LBDCustomGUI.h"/>
+      <FILE id="tiWEn8" name="FreqAnalyzer.h" compile="0" resource="0" file="Source/FreqAnalyzer.h"/>
+      <FILE id="mqoyu5" name="SpectrumUtil.h" compile="0" resource="0" file="Source/SpectrumUtil.h"/>
     </GROUP>
     <GROUP id="{E495BB3A-D468-E30D-F5C5-198ADE85E04A}" name="LBD_dsp">
       <FILE id="vi3hTZ" name="AmpMod.h" compile="0" resource="0" file="Source/AmpMod.h"/>
@@ -41,6 +42,10 @@
             file="Source/SchroederAPLine.h"/>
     </GROUP>
     <GROUP id="{CB5125CB-D144-4860-6544-AD397705556E}" name="Source">
+      <FILE id="de210X" name="ParameterManager.cpp" compile="1" resource="0"
+            file="Source/ParameterManager.cpp"/>
+      <FILE id="ss8Zja" name="ParameterManager.h" compile="0" resource="0"
+            file="Source/ParameterManager.h"/>
       <FILE id="BkJYD3" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="PrRIf6" name="PluginProcessor.h" compile="0" resource="0"
@@ -58,6 +63,8 @@
     <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
             useGlobalPath="1"/>
     <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors_headless" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -69,7 +76,8 @@
   </MODULES>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX" xcodeValidArchs="arm64,arm64e,x86_64">
+    <XCODE_MAC targetFolder="Builds/MacOSX" xcodeValidArchs="arm64,arm64e,x86_64"
+               keepCustomXcodeSchemes="1">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="hybridrevjo" osxArchitecture="Native"
                        codeSigningIdentity="&quot;&quot;"/>
@@ -91,6 +99,7 @@
         <MODULEPATH id="juce_audio_plugin_client" path="../../../../../Documents/JUCE/modules"/>
         <MODULEPATH id="juce_audio_utils" path="../../../../../Documents/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors_headless" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>

@@ -39,13 +39,13 @@ public:
         }
     }
         
-    void changeCoeffs(bool switchInput)
+    void changeCoeffs(unsigned int switchInput)
     {
-        if (switchInput == false){
+        if (switchInput == 1){
             biquad->setCoefficients(lpCoeffs);
             //biquad->reset();
         }
-        else if (switchInput == true){
+        else if (switchInput == 2){
             biquad->setCoefficients(hpCoeffs);
             //biquad->reset();
         }

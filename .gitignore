@@ -1,0 +1,38 @@
+# OS X temporary files
+.DS_Store
+.Trashes
+
+# Editor temporary files
+*.swp
+*.lock
+
+# Xcode temporary files
+*~.nib
+
+# Xcode build files
+DerivedData/
+build/
+
+# Xcode private settings (window sizes, bookmarks, breakpoints, custom executables, smart groups)
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Whitelist default files
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+
+# Xcode 4 - semi-personal settings
+*.xccheckout
+xcuserdata/
+
+# Xcode 4 - Deprecated classes
+*.moved-aside
+
+# Juce related
+JuceLibraryCode/
+Builds/
+Notes.md
