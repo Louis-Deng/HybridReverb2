@@ -10,7 +10,7 @@
               version="2.21" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
   <MAINGROUP id="zECeUI" name="hybridrevjo">
     <GROUP id="{A3727F7F-C474-E93B-BF15-FE140D277FBD}" name="MISC">
-      <FILE id="tkA1LD" name="Notes" compile="0" resource="1" file="Notes"/>
+      <FILE id="Y5AA1N" name="Notes.md" compile="0" resource="1" file="Notes.md"/>
     </GROUP>
     <GROUP id="{8D74D7EC-7141-0F54-6FE6-78E4AECD1FDA}" name="Resources">
       <GROUP id="{A419C2D6-24E3-71FF-6F3A-EA7DCDB5D508}" name="Audio">
