@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -128,6 +120,23 @@ HybridrevjoAudioProcessorEditor::HybridrevjoAudioProcessorEditor
 
 HybridrevjoAudioProcessorEditor::~HybridrevjoAudioProcessorEditor()
 {
+    // Remove listeners you added in the constructor
+    drywetMix.removeListener(this);
+    decayTime.removeListener(this);
+    modAmp.removeListener(this);
+    modSpd.removeListener(this);
+    dampSet.removeListener(this);
+    menuSelect.removeListener(this);
+    preFilterSwitch.removeListener(this);
+
+    // Explicitly reset attachments so they drop parameter listeners
+    drywetMixAtt.reset();
+    decayTimeAtt.reset();
+    modAmpAtt.reset();
+    modSpdAtt.reset();
+    dampSetAtt.reset();
+    preFilterSwitchAtt.reset();
+    menuAtt.reset();
 }
 //==============================================================================
 void spectrogramPaint (std::vector<float> dbVector)
@@ -156,56 +165,20 @@ void HybridrevjoAudioProcessorEditor::paint (juce::Graphics& g)
 
 void HybridrevjoAudioProcessorEditor::sliderValueChanged(juce::Slider* subject)
 {
-    if (subject == &drywetMix)
-    {
-        audioProcessor.mDWM[0]->injectProportion(drywetMix.getValue());
-        audioProcessor.mDWM[1]->injectProportion(drywetMix.getValue());
-    }
-    
-    if (subject == &decayTime)
-    {
-        // change t60-related in LBCF and AP
-        audioProcessor.mLatRev[0]->t60ToLBCFLength(decayTime.getValue());
-        audioProcessor.mLatRev[0]->t60ToAPLength(decayTime.getValue());
-        audioProcessor.mLatRev[1]->t60ToLBCFLength(decayTime.getValue());
-        audioProcessor.mLatRev[1]->t60ToAPLength(decayTime.getValue());
-    }
-    
-    if (subject == &modAmp)
-    {
-        audioProcessor.mLatRev[0]->changeModulationAmp(modAmp.getValue());
-        audioProcessor.mLatRev[1]->changeModulationAmp(modAmp.getValue());
-    }
-    
-    if (subject == &modSpd)
-    {
-        audioProcessor.mLatRev[0]->changeModulationSpd(modSpd.getValue());
-        audioProcessor.mLatRev[1]->changeModulationSpd(modSpd.getValue());
-    }
-    
-    if (subject == &dampSet)
-    {
-        audioProcessor.mLatRev[0]->changeDamping(dampSet.getValue());
-        audioProcessor.mLatRev[1]->changeDamping(dampSet.getValue());
-    }
-    
+    juce::ignoreUnused(subject);
+    // UI controls are attached to parameters; DSP reacts via ParameterManager listeners.
 }
 
 void HybridrevjoAudioProcessorEditor::comboBoxChanged(juce::ComboBox* subject)
 {
-    audioProcessor.mConMan->changeIR(subject->getSelectedId());
-    //textLabel.setFont (textFont);
+    juce::ignoreUnused(subject);
+    // ComboBoxAttachment updates the parameter; DSP reacts via ParameterManager.
 }
 
 void HybridrevjoAudioProcessorEditor::buttonClicked(juce::Button* subject)
 {
-    if (subject == &preFilterSwitch){
-        // change the filter coefficients in FilterIntegration
-        // ...
-        audioProcessor.mFI[0]->changeCoeffs(preFilterSwitch.getState());
-        audioProcessor.mFI[1]->changeCoeffs(preFilterSwitch.getState());
-        
-    }
+    juce::ignoreUnused(subject);
+    // ButtonAttachment updates the parameter; DSP reacts via ParameterManager.
 }
 
 void HybridrevjoAudioProcessorEditor::resized()
@@ -213,4 +186,3 @@ void HybridrevjoAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
 }
-

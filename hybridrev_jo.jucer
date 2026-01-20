@@ -2,12 +2,12 @@
 
 <JUCERPROJECT id="CqxqDj" name="hybridrevjo" projectType="audioplug" useAppConfig="1"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              companyName="LouisDeng" companyWebsite="https://github.com/Louis-Deng"
+              companyName="Louis DSP" companyWebsite="https://github.com/Louis-Deng"
               pluginFormats="buildAAX,buildAU,buildVST3" pluginAUMainType="'aufx'"
               pluginVST3Category="Fx,Reverb,Stereo" pluginAAXCategory="8,8192"
               pluginVSTCategory="kPlugCategEffect" maxBinaryFileSize="20971520"
-              pluginName="Rebirberator 2" pluginCode="Hrb2" pluginManufacturerCode="Lbdx"
-              version="2.11" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
+              pluginName="Rebirberator 2" pluginCode="Hrb2" pluginManufacturerCode="LDSP"
+              version="2.21" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
   <MAINGROUP id="zECeUI" name="hybridrevjo">
     <GROUP id="{A3727F7F-C474-E93B-BF15-FE140D277FBD}" name="MISC">
       <FILE id="tkA1LD" name="Notes" compile="0" resource="1" file="Notes"/>
@@ -42,6 +42,10 @@
             file="Source/SchroederAPLine.h"/>
     </GROUP>
     <GROUP id="{CB5125CB-D144-4860-6544-AD397705556E}" name="Source">
+      <FILE id="de210X" name="ParameterManager.cpp" compile="1" resource="0"
+            file="Source/ParameterManager.cpp"/>
+      <FILE id="ss8Zja" name="ParameterManager.h" compile="0" resource="0"
+            file="Source/ParameterManager.h"/>
       <FILE id="BkJYD3" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="PrRIf6" name="PluginProcessor.h" compile="0" resource="0"

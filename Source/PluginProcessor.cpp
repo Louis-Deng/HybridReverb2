@@ -1,15 +1,10 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
 //==============================================================================
+// Add definition for parameterManager
+std::unique_ptr<ParameterManager> parameterManager;
+
 HybridrevjoAudioProcessor::HybridrevjoAudioProcessor()
     : mBufferSize(0)
     , mSampleRate(0.0)
@@ -34,7 +29,7 @@ HybridrevjoAudioProcessor::HybridrevjoAudioProcessor()
                                                          "Decay Time t60",
                                                          juce::NormalisableRange(0.170f,10.0f,0.0001f,0.425f),
                                                          3.200f,
-                                                         juce::AudioParameterFloatAttributes().withStringFromValueFunction ([] (auto x, auto) { 
+                                                         juce::AudioParameterFloatAttributes().withStringFromValueFunction ([] (auto x, auto) {
                                                             if(x<1.0f) {return juce::String(x*1000.0f)+" ms";}
                                                             else {return juce::String(x)+" s";}
                                                         })
@@ -83,7 +78,7 @@ HybridrevjoAudioProcessor::HybridrevjoAudioProcessor()
     for (int ch=0;ch<2;ch++)
     {
         // init filter integration
-        mFI[ch].reset(new FilterIntegration<double>);
+        //mFI[ch].reset(new FilterIntegration<double>);
         // init late reverb manager
         mLatRev[ch].reset(new LateReverbManager<double>);
         // init dry/wet mixer
@@ -94,6 +89,17 @@ HybridrevjoAudioProcessor::HybridrevjoAudioProcessor()
         mDWM[ch]->setid((uint32_t)ch);
         mDWM[ch]->communicateFreqAnalyzerPtrs(freqAnalyzer);
     }
+    
+    // Create ParameterManager to route APVTS -> DSP
+    parameterManager = std::make_unique<ParameterManager>(
+        parameters,
+        mDWM[0].get(), mDWM[1].get(),
+        mLatRev[0].get(), mLatRev[1].get(),
+        //mFI[0].get(), mFI[1].get(),
+        mConMan.get()
+    );
+    //parameterManager->applyAllParametersToDSP(); - this inits no-sampling-rate params in delay lines, bad
+    
 }
 
 HybridrevjoAudioProcessor::~HybridrevjoAudioProcessor()
@@ -173,6 +179,8 @@ void HybridrevjoAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
     mLatRev[0]->setSamplingRate(sampleRate);
     mLatRev[1]->setSamplingRate(sampleRate);
     
+    // crucial to set all params after setting sampling rate
+    if (parameterManager) parameterManager->applyAllParametersToDSP();
 }
 
 void HybridrevjoAudioProcessor::releaseResources()
@@ -305,6 +313,7 @@ void HybridrevjoAudioProcessor::setStateInformation (const void* data, int sizeI
         {
             parameters.replaceState (juce::ValueTree::fromXml (*xmlState));
             //DBG("GOT STATE INFO FROM " << "..." << "! ");
+            if (parameterManager) parameterManager->applyAllParametersToDSP();
         }
 }
 

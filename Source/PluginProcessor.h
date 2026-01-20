@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
@@ -13,6 +5,7 @@
 #include "LateReverbManager.h"
 #include "FilterIntegration.h"
 #include "DWmixer.h"
+#include "ParameterManager.h"
 
 //==============================================================================
 /**
@@ -56,15 +49,6 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-
-    //==============================================================================
-    std::unique_ptr< FilterIntegration<double> > mFI[2];
-    std::unique_ptr< ConvolutionManager<float> > mConMan;
-    std::unique_ptr< LateReverbManager<double> > mLatRev[2];
-    
-    std::unique_ptr< DWmixer<double> > mDWM[2];
-    
-    std::shared_ptr< FreqAnalyzer > freqAnalyzer;
     
     //==============================================================================
     
@@ -73,6 +57,17 @@ private:
     
     //==============================================================================
     int mBufferSize;
+    //==============================================================================
+    //std::unique_ptr< FilterIntegration<double> > mFI[2];
+    std::unique_ptr< ConvolutionManager<float> > mConMan;
+    std::unique_ptr< LateReverbManager<double> > mLatRev[2];
+    
+    std::unique_ptr< DWmixer<double> > mDWM[2];
+    
+    std::shared_ptr< FreqAnalyzer > freqAnalyzer;
+    
+    std::unique_ptr<ParameterManager> parameterManager;
+     
     float mSampleRate;
     juce::AudioProcessorValueTreeState parameters;
     //==============================================================================
