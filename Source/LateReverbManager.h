@@ -55,7 +55,7 @@ public:
     {
         for (int i=0;i<numSamps;i++)
         {
-            *(buffer+i) = tick(*(buffer+i));
+            *(buffer+i) = static_cast<float>(tick(*(buffer+i)));
         }
     }
     
@@ -63,8 +63,8 @@ public:
     void t60ToLBCFLength(float t60)
     {
         // force brickwall t_60 values
-        if (t60<0.17)  t60 = 0.17;
-        if (t60>10.0)  t60 = 10.0;
+        if (t60<0.17f)  t60 = 0.17f;
+        if (t60>10.0f)  t60 = 10.0f;
         /**
          < code snippet from Louis's MA Thesis - Hybrid Reverberation Algorithm>
          % S&L says 1~1.5 range
@@ -86,16 +86,16 @@ public:
          */
         // below algorithm finds N (FIXED #Ch) lengths based on fs_ and t60, Gcs and Gk
         float t60insamp = fs_*t60;
-        float suml = t60insamp*(0.33/4*MATDIM);
+        float suml = t60insamp * (0.33f / 4.0f * static_cast<float>(MATDIM));
         
-        for (int i=0;i<MATDIM;i++)
+        for (size_t i = 0; i < MATDIM; i++)
         {
             // calculate length
-            lbcfLengths_[i] = pArr.closestPrime( lbcfLRatios_[i] / lbcfRatioSum_ * suml, nullptr );
+            lbcfLengths_[i] = static_cast<float>(pArr.closestPrime( lbcfLRatios_[i] / lbcfRatioSum_ * suml, nullptr ));
             if (lbcfLengths_[i] < 7.0) lbcfLengths_[i] = 7.0;  //shouldn't happen, just in case it crashes with length modulation.
             // calculate gc
-            lbcfGcs_[i] = pow(10.0f,-3*lbcfLengths_[i]/t60insamp);
-            if (abs(lbcfGcs_[i])>1.0f) lbcfGcs_[i] = lbcfGcs_[i]/abs(lbcfGcs_[i]);  //shouldn't happen, but just in case it feeds back over 1.
+            lbcfGcs_[i] = std::pow(10.0f, -3.0f * lbcfLengths_[i] / t60insamp);
+            if (std::abs(lbcfGcs_[i])>1.0f) lbcfGcs_[i] = lbcfGcs_[i]/std::abs(lbcfGcs_[i]);  //shouldn't happen, but just in case it feeds back over 1.
             // inject two parameters
             lbcfCH[i]->injectComb(lbcfLengths_[i],lbcfGcs_[i]);
             
@@ -143,11 +143,11 @@ public:
          end
          */
         // below algorithm finds 8 (FIXED #Pipe) lengths based on fs_ and t60
-        float maxl = fs_*t60*log10(1/0.708)/3.0f;
+        float maxl = fs_ * t60 * std::log10(1.0f / 0.708f) / 3.0f;
         
-        for (int i=0;i<APCASC;i++)
+        for (size_t i = 0; i < APCASC; i++)
         {
-            apLengths_[i] = pArr.closestPrime( apLRatios_[i] * maxl, nullptr );
+            apLengths_[i] = static_cast<float>(pArr.closestPrime( apLRatios_[i] * maxl, nullptr ));
             apCH[i]->injectLength(apLengths_[i]);
             //DBG("AP ch." << juce::String(i) << " set to " << juce::String(apLengths_[i]));
         }
@@ -164,7 +164,7 @@ public:
     
     void changeModulationAmp(float modAmp)
     {
-        for (int i=0;i<MATDIM;i++)
+        for (size_t i = 0; i < MATDIM; i++)
         {
             lbcfCH[i]->injectModAmp(modAmp);
         }
@@ -172,7 +172,7 @@ public:
     
     void changeModulationSpd(float modSpd)
     {
-        for (int i=0;i<MATDIM;i++)
+        for (size_t i = 0; i < MATDIM; i++)
         {
             lbcfCH[i]->injectModSpd(modSpd);
         }
@@ -182,15 +182,15 @@ public:
     {
         //dF = 0~10, damping = 2000~800, logN scale
         //y = -8332.31 log(0.0906911 (x+1))
-        baseLPfreq_ = -500.438869709*log(dampFactor+1.0)+2000;
-        for (int i=0;i<MATDIM;i++)
+        baseLPfreq_ = -500.438869709f * std::log(dampFactor + 1.0f) + 2000.0f;
+        for (size_t i = 0; i < MATDIM; i++)
         {
             //DBG("set LBCF channel with LP = " + juce::String(baseLPfreq_*pow(10,biasLPexponents_[i])));
             //if (i%2==0) lbcfCH[i]->injectBiquadFreq(baseLPfreq_,1);
             //if (i%2==1) lbcfCH[i]->injectBiquadFreq(baseLPfreq_,2);
             
             // clamp the base LP freq with tilt based on actual SR vs 48000Hz
-            float specificLPfreq = baseLPfreq_*pow(10,biasLPexponents_[i])*fs_scale_;
+            float specificLPfreq = baseLPfreq_ * std::pow(10.0f, biasLPexponents_[i]) * fs_scale_;
             
             //DBG
             if (specificLPfreq > fs_/2.0f)
@@ -205,8 +205,8 @@ public:
     
 private:
     // basics
-    float fs_;
-    float fs_scale_; // for tilting the damping biquad frequency
+    float fs_ = 48000.0f;
+    float fs_scale_ = 1.0f; // for tilting the damping biquad frequency
     SignalType outSamp_ = 0.0f;
     
     // util
@@ -238,38 +238,38 @@ private:
     void init()
     {
         // initialize all unique_ptr objects
-        for (int i=0;i<MATDIM;i++)
+        for (size_t i = 0; i < MATDIM; i++)
         {
             lbcfCH[i].reset( new BiquadCombChannel<SignalType> );
-            lbcfCH[i]->channel_id = i;
+            lbcfCH[i]->channel_id = static_cast<unsigned int>(i);
         }
         fdnMat.reset( new matrixOperation<SignalType> );
-        for (int i=0;i<APCASC;i++)
+        for (size_t i = 0; i < APCASC; i++)
         {
             apCH[i].reset( new SchroederAPLine<SignalType> );
-            apCH[i]->pipe_id = i;
+            apCH[i]->pipe_id = static_cast<unsigned int>(i);
             apCH[i]->injectGain(0.708f);
         }
                 
         // precalculate the ratios
         lbcfLRatios_[0] = 1.0f;
         lbcfRatioSum_ += lbcfLRatios_[0];
-        for (int i=1;i<MATDIM;i++)
+        for (size_t i = 1; i < MATDIM; i++)
         {
-            lbcfLRatios_[i] = lbcfLRatios_[i-1] + 0.67f/(MATDIM-1);
+            lbcfLRatios_[i] = lbcfLRatios_[i-1] + 0.67f / static_cast<float>(MATDIM - 1);
             lbcfRatioSum_ += lbcfLRatios_[i];
         }
-        for (int i=0;i<APCASC;i++)
+        for (size_t i = 0; i < APCASC; i++)
         {
-            apLRatios_[i] = pow( 1.0f/(APCASC-1), i );
+            apLRatios_[i] = std::pow(1.0f / static_cast<float>(APCASC - 1), static_cast<float>(i));
         }
         
         // precalculate frequency bias exponent ratios
         
-        biasLPexponents_[MATDIM-1] = 1.0;
+        biasLPexponents_[MATDIM-1] = 1.0f;
         for (int i=MATDIM-2;i>=0;i--)
         {
-            biasLPexponents_[i] = biasLPexponents_[i+1] - 0.5f/(MATDIM-1);
+            biasLPexponents_[static_cast<size_t>(i)] = biasLPexponents_[static_cast<size_t>(i+1)] - 0.5f / static_cast<float>(MATDIM - 1);
         }
         
         //DBG("LATE REV CH INIT DONE. ");
@@ -281,7 +281,7 @@ private:
         
         
         // LBCF to matrix
-        for (int i=0;i<MATDIM;i++)
+        for (size_t i = 0; i < MATDIM; i++)
         {
             x_matIn_[i] = lbcfCH[i]->tick( inSamp + fdnMat->lastOutAtChan(i) );
         }
@@ -291,7 +291,7 @@ private:
         
         // correction to AP
         
-        for (int i=0;i<APCASC;i++)
+        for (size_t i = 0; i < APCASC; i++)
         {
             x_pipethru_ = apCH[i]->tick(x_pipethru_);
         }

@@ -32,13 +32,13 @@ public:
         if (target>maximumSample) target = maximumSample;
                 
         /// estimated value in prime number catalogue
-        int closestNum = -1;
+        unsigned int closestNum = 0;
         /// index of catalogue
-        unsigned short int indC = 0;
+        size_t indC = 0;
         /// difference between *target* and *estimated prime numbers*
-        short int closeNess = 4096;
+        float closeNess = 4096.0f;
         /// difference between *target* and *estimated neighbour prime numbers*
-        short int neighbourDistance = 1;
+        float neighbourDistance = 1.0f;
         
         /**
          synopsis of this algorithm is to first estimate the closest prime number using a predetermined linear approximation of target float to index equation
@@ -63,29 +63,29 @@ public:
          */
         
         // approximate indC first
-        indC = floor( (target+240.36)/7.76 );
+        indC = static_cast<size_t>(std::floor((target + 240.36f) / 7.76f));
         
         // if target is too big, return biggest available prime number
-        if (indC < 0) indC = 0;
         if (indC > arrPrime.size()-1) indC = arrPrime.size()-1;
         
         // judge closeness of the target:X and estimate:C
-        while(abs(closeNess)>neighbourDistance)
+        while (std::abs(closeNess) > neighbourDistance)
         {
             closestNum = arrPrime[indC];
-            closeNess = round(closestNum-target);
+            closeNess = std::round(static_cast<float>(closestNum) - target);
             
             if (indC == arrPrime.size()-1 )
             {
-                neighbourDistance = round(target-arrPrime[arrPrime.size()-2]);
+                neighbourDistance = std::round(target - static_cast<float>(arrPrime[arrPrime.size()-2]));
             }
             else if (indC == 0)
             {
-                neighbourDistance = round(arrPrime[1]-target);
+                neighbourDistance = std::round(static_cast<float>(arrPrime[1]) - target);
             }
             else
             {
-                neighbourDistance = round(std::min( target-arrPrime[indC-1] , arrPrime[indC+1]-target ));
+                neighbourDistance = std::round(std::min(target - static_cast<float>(arrPrime[indC-1]),
+                                                        static_cast<float>(arrPrime[indC+1]) - target));
             }
             
             
@@ -112,7 +112,7 @@ public:
         
         // find if the number is in the exclusion criteria
         bool numExcluded = false;
-        for (int indE=0;indE<arrExclusionPtr->size();indE++)
+        for (size_t indE = 0; indE < arrExclusionPtr->size(); indE++)
         {
             
             // check if included in blacklist
@@ -125,11 +125,11 @@ public:
             if (numExcluded == true)
             {
                 indC++;
-                if (indC<=arrExclusionPtr->size())
+                if (indC < arrPrime.size())
                 {
                     closestNum = arrPrime[indC];
                 }else{
-                    closestNum = -1;
+                    closestNum = 0;
                 }
                 
             }
@@ -148,17 +148,17 @@ private:
     {
         arrPrime.clear();
         arrPrime.push_back(2);
-        for (int num=3;num<90000;num+=2)
+        for (unsigned int num = 3; num < 90000; num += 2)
         {
             bool checkpoint = false;
-            for (int i=0;i<arrPrime.size();i++)
+            for (size_t i = 0; i < arrPrime.size(); i++)
             {
                 if (num%arrPrime[i]==0)
                 {
                     checkpoint = true;
                     break;
                 }
-                if (arrPrime[i]>sqrt(num))
+                if (arrPrime[i] > static_cast<unsigned int>(std::sqrt(static_cast<float>(num))))
                 {
                     break;
                 }

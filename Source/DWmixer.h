@@ -43,7 +43,7 @@ public:
             faPtr->injectSampleToTo(*(wetBufferWrite+i),thisChanid,1);
             
             //overwrite wet with dry+wet
-            *(wetBufferWrite+i) = mix(*(dryBufferRead+i),*(wetBufferWrite+i));
+            *(wetBufferWrite+i) = static_cast<float>(mix(*(dryBufferRead+i),*(wetBufferWrite+i)));
         }
     }    
     
@@ -63,7 +63,7 @@ private:
     double proportion = 0.0;
     
     // channel id, distinguish left and right
-    uint32_t thisChanid;
+    uint32_t thisChanid = 0;
     
     // shared ptr storage
     std::shared_ptr<FreqAnalyzer> faPtr;

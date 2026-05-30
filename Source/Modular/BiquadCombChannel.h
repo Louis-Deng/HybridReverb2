@@ -80,13 +80,14 @@ public:
     void injectComb(float inputLength, float gc)
     {
         
-        if (delayComb_->getDelay() == 0)
+        if (!delayInitialized_)
         {
             // first time setting delay
             delayComb_->setDelay(inputLength);
             params_->combL_ = inputLength;
             params_->gc_ = gc;
             delayComb_->reset();
+            delayInitialized_ = true;
         }
         else
         {
@@ -113,7 +114,7 @@ public:
         // push and pop!
         delayComb_->pushSample(0,iSamp);
         oSamp_ = delayComb_->popSample(0,params_->sumCombL()) * params_->gc_;
-        oSamp_ = biquadFilter_->processSingleSampleRaw(oSamp_);
+        oSamp_ = static_cast<SignalType>(biquadFilter_->processSingleSampleRaw(static_cast<float>(oSamp_)));
         return oSamp_;
     }
     
@@ -150,7 +151,8 @@ private:
     std::unique_ptr< AmplitudeModulationCurve> combLMod_;
     
     /// last output sample
-    SignalType oSamp_;
+    SignalType oSamp_ = 0.0f;
+    bool delayInitialized_ = false;
     
     /// initialize LBCF once when created
     void init()

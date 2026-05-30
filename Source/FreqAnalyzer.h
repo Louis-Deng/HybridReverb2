@@ -26,7 +26,7 @@ public:
     {
         // initialize juce fft object
         fftOp.reset(new juce::dsp::FFT(FFTORDER));
-        fftBufferSize = (fftOp->getSize()) << 1;
+        fftBufferSize = static_cast<uint32_t>(fftOp->getSize() << 1);
         // make two buffers the size of fft buffersize
         iBuffer.resize(fftBufferSize);
         oBuffer.resize(fftBufferSize);
@@ -61,7 +61,7 @@ public:
     
     std::vector<float> getBuffer() const { return oBuffer; }
     
-    int getIterB() const { return iterBuffer; }
+    uint32_t getIterB() const { return iterBuffer; }
     
 private:
     /// I/O Buffer
@@ -89,8 +89,8 @@ public:
         iterBuffer = dryUnit->getIterB();
         
         // should be 1/2 fftSize
-        dryMags.resize(pow(2,iterBuffer));
-        wetMags.resize(pow(2,iterBuffer));
+        dryMags.resize(static_cast<size_t>(1u << iterBuffer));
+        wetMags.resize(static_cast<size_t>(1u << iterBuffer));
         
         // set bounds for graphics
         /*
@@ -106,7 +106,7 @@ public:
         xPos = 15+(int)chan*315;
         
     }
-    ~FreqAnalChannel()
+    ~FreqAnalChannel() override
     {
     }
     
@@ -140,15 +140,15 @@ public:
     
 private:
     // iterB
-    int iterBuffer;
+    uint32_t iterBuffer = 0;
     
     // dry and wet fft units
     std::unique_ptr<fftUnit> dryUnit;
     std::unique_ptr<fftUnit> wetUnit;
     
     // ready to show content
-    bool dryReady;
-    bool wetReady;
+    bool dryReady = false;
+    bool wetReady = false;
     
     // magnitude in dB graph
     std::vector<float> dryMags;
@@ -195,9 +195,6 @@ public:
     
     
 private:
-    // bin number max
-    uint32_t iterBLimit = pow(2,FFTORDER-1);
-    
     /// leftright, drywet buffers
     FreqAnalChannel LFAC = FreqAnalChannel(0);
     FreqAnalChannel RFAC = FreqAnalChannel(1);

@@ -15,23 +15,21 @@ To build for yourself, see JUCE documentation on how to use Projucer.
 Debug (development)
 cmake -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build --target hybridrevjo_AU -j
-Other debug targets:
-
 cmake --build build --target hybridrevjo_VST3 -j
 cmake --build build --target hybridrevjo_Standalone -j
+
 Output: build/hybridrevjo_artefacts/Debug/...
 AU install (with COPY_PLUGIN_AFTER_BUILD): ~/Library/Audio/Plug-Ins/Components/Rebirberator 2.component
 
 Validate:
-
 auval -v aufx Hrb2 LDSP
+
 Release (shipping / performance testing)
 cmake -B build-release -DCMAKE_BUILD_TYPE=Release
 cmake --build build-release --target hybridrevjo_AU -j
-Other release targets:
-
 cmake --build build-release --target hybridrevjo_VST3 -j
 cmake --build build-release --target hybridrevjo_Standalone -j
+
 Output: build-release/hybridrevjo_artefacts/Release/...
 Release AU is also copied to ~/Library/Audio/Plug-Ins/Components/ on build.
 

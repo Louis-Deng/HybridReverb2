@@ -157,27 +157,32 @@ int HybridrevjoAudioProcessor::getCurrentProgram()
 
 void HybridrevjoAudioProcessor::setCurrentProgram (int index)
 {
+    juce::ignoreUnused(index);
 }
 
 const juce::String HybridrevjoAudioProcessor::getProgramName (int index)
 {
+    juce::ignoreUnused(index);
     return {};
 }
 
 void HybridrevjoAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
+    juce::ignoreUnused(index, newName);
 }
 
 //==============================================================================
 void HybridrevjoAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    juce::ignoreUnused(samplesPerBlock);
     // Use this method as the place to do any pre-playback initialisation that you need..
     // DBG("PROCESSOR: PREPARE TO PLAY");
     
     // set sampleRates + preparetoplay
-    mConMan->setSamplingRate(sampleRate);
-    mLatRev[0]->setSamplingRate(sampleRate);
-    mLatRev[1]->setSamplingRate(sampleRate);
+    auto sampleRateFloat = static_cast<float>(sampleRate);
+    mConMan->setSamplingRate(sampleRateFloat);
+    mLatRev[0]->setSamplingRate(sampleRateFloat);
+    mLatRev[1]->setSamplingRate(sampleRateFloat);
     
     // crucial to set all params after setting sampling rate
     if (parameterManager) parameterManager->applyAllParametersToDSP();
@@ -217,6 +222,7 @@ bool HybridrevjoAudioProcessor::isBusesLayoutSupported (const BusesLayout& layou
 
 void HybridrevjoAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    juce::ignoreUnused(midiMessages);
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();

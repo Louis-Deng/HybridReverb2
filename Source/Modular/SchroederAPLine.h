@@ -47,12 +47,13 @@ public:
     void injectLength(float inputLength)
     {
         
-        if (delayAP_->getDelay() == 0)
+        if (!delayInitialized_)
         {
             // first time setting delay
             delayAP_->setDelay(inputLength);
             apL_ = inputLength;
             delayAP_->reset();
+            delayInitialized_ = true;
         }
         else
         {
@@ -105,14 +106,15 @@ private:
     std::unique_ptr< AmplitudeModulationCurve> apLMod_;
     
     /// internal params
-    float ga_;
-    float apL_;
+    float ga_ = 0.0f;
+    float apL_ = 0.0f;
     
     /// register
-    float vn_;
+    SignalType vn_ = 0.0f;
     
     /// lastout sample
     SignalType oSamp_ = 0.0f;
+    bool delayInitialized_ = false;
     
     /// initialize once when created
     void init()

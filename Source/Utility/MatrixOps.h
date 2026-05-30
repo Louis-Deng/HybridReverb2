@@ -25,7 +25,7 @@ public:
         
     }
     
-    SignalType lastOutAtChan(unsigned int chan) const
+    SignalType lastOutAtChan(size_t chan) const
     {
         return outputVecStore[chan];
     }
@@ -44,7 +44,7 @@ public:
         
         // sum output vector into value
         outSamp = 0.0f;
-        for (int i=0;i<inVec.size();i++)
+        for (size_t i = 0; i < inVec.size(); i++)
         {
             outSamp+=inVec[i];
         }
@@ -220,9 +220,9 @@ private:
     void tinyRotateTick()
     {
         std::vector<std::vector<double>> matout(MATDIM, std::vector<double>(MATDIM, 0.0f));
-        for (int m=0;m<MATDIM;m++) {
-            for (int n=0;n<MATDIM;n++) {
-                for (int i=0;i<MATDIM;i++) {
+        for (size_t m = 0; m < MATDIM; m++) {
+            for (size_t n = 0; n < MATDIM; n++) {
+                for (size_t i = 0; i < MATDIM; i++) {
                     matout[m][n] += matrixUse[m][i] * (*ptrRotmatUse)[n][i];
                 }
             }
@@ -234,9 +234,9 @@ private:
     void vecTick(std::vector<SignalType>& vecIn)
     {
         clearStorage();
-        for(int m=0;m<MATDIM;m++){
-            for(int n=0;n<MATDIM;n++){
-                outputVecStore[m] += (double)vecIn[n] * matrixUse[m][n];
+        for(size_t m = 0; m < MATDIM; m++){
+            for(size_t n = 0; n < MATDIM; n++){
+                outputVecStore[m] += static_cast<SignalType>(static_cast<double>(vecIn[n]) * matrixUse[m][n]);
                 
             }
             vecIn[m] = outputVecStore[m];
@@ -246,7 +246,7 @@ private:
     void clearStorage()
     {
         //clear outputvecstorage
-        for (int i=0;i<MATDIM;i++)
+        for (size_t i = 0; i < MATDIM; i++)
         {
             outputVecStore[i] = 0.0f;
         }

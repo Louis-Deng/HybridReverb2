@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 project(hybridrevjo VERSION 2.21)
+set(HYBRIDREVJO_OUTPUT_NAME "Rebirberator2")
 
 set(JUCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../JUCE" CACHE PATH "Path to JUCE")
 if(NOT EXISTS "${JUCE_PATH}/CMakeLists.txt")
@@ -25,8 +26,8 @@ juce_add_plugin(hybridrevjo
 
     PLUGIN_MANUFACTURER_CODE LDSP
     PLUGIN_CODE Hrb2
-    PLUGIN_NAME "Rebirberator 2"
-    PRODUCT_NAME "Rebirberator 2"
+    PLUGIN_NAME "${HYBRIDREVJO_OUTPUT_NAME}"
+    PRODUCT_NAME "${HYBRIDREVJO_OUTPUT_NAME}"
 
     FORMATS AU VST3 Standalone
     AU_MAIN_TYPE kAudioUnitType_Effect

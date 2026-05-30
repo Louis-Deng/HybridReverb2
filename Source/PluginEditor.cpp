@@ -139,13 +139,6 @@ HybridrevjoAudioProcessorEditor::~HybridrevjoAudioProcessorEditor()
     menuAtt.reset();
 }
 //==============================================================================
-void spectrogramPaint (std::vector<float> dbVector)
-{
-    
-}
-
-
-//==============================================================================
 void HybridrevjoAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
