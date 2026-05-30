@@ -11,7 +11,37 @@ Built using JUCE 8.0.1 and Xcode 15.4
 To build for yourself, see JUCE documentation on how to use Projucer. 
 
 
+# Debug and Build using CMake
+Debug (development)
+cmake -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build --target hybridrevjo_AU -j
+Other debug targets:
 
+cmake --build build --target hybridrevjo_VST3 -j
+cmake --build build --target hybridrevjo_Standalone -j
+Output: build/hybridrevjo_artefacts/Debug/...
+AU install (with COPY_PLUGIN_AFTER_BUILD): ~/Library/Audio/Plug-Ins/Components/Rebirberator 2.component
+
+Validate:
+
+auval -v aufx Hrb2 LDSP
+Release (shipping / performance testing)
+cmake -B build-release -DCMAKE_BUILD_TYPE=Release
+cmake --build build-release --target hybridrevjo_AU -j
+Other release targets:
+
+cmake --build build-release --target hybridrevjo_VST3 -j
+cmake --build build-release --target hybridrevjo_Standalone -j
+Output: build-release/hybridrevjo_artefacts/Release/...
+Release AU is also copied to ~/Library/Audio/Plug-Ins/Components/ on build.
+
+Cursor tasks
+In Terminal → Run Task:
+
+Build AU (Debug) — default build task
+Build AU (Release)
+Build Standalone (Debug) / (Release)
+Validate AU — runs auval after a debug AU build
 
 # Version 2.06
 stripped unnecessary code, prefiltering button removed for further refinement (does not affect audio)

@@ -12,6 +12,7 @@
 # Xcode build files
 DerivedData/
 build/
+build-release/
 
 # Xcode private settings (window sizes, bookmarks, breakpoints, custom executables, smart groups)
 *.pbxuser

@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Standalone",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/hybridrevjo_artefacts/Debug/Standalone/Rebirberator 2.app/Contents/MacOS/Rebirberator 2",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build Standalone"
+        },
+        {
+            "name": "Launch AudioPluginHost",
+            "type": "lldb",
+            "request": "launch",
+            "program": "/Users/louisdeng/Documents/JUCE/extras/AudioPluginHost/Builds/MacOSX/build/Debug/AudioPluginHost.app/Contents/MacOS/AudioPluginHost",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build AU (Debug)"
+        },
+        {
+            "name": "Attach to AudioPluginHost (AU debug)",
+            "type": "lldb",
+            "request": "attach",
+            "program": "/Users/louisdeng/Documents/JUCE/extras/AudioPluginHost/Builds/MacOSX/build/Debug/AudioPluginHost.app/Contents/MacOS/AudioPluginHost",
+            "waitFor": true
+        }
+    ]
+}

@@ -1,0 +1,70 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: Configure (Debug)",
+            "type": "shell",
+            "command": "/opt/homebrew/bin/cmake",
+            "args": ["-B", "build", "-DCMAKE_BUILD_TYPE=Debug"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "build"
+        },
+        {
+            "label": "CMake: Configure (Release)",
+            "type": "shell",
+            "command": "/opt/homebrew/bin/cmake",
+            "args": ["-B", "build-release", "-DCMAKE_BUILD_TYPE=Release"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "build"
+        },
+        {
+            "label": "Build AU (Debug)",
+            "type": "shell",
+            "command": "/opt/homebrew/bin/cmake",
+            "args": ["--build", "build", "--target", "hybridrevjo_AU", "-j"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": { "kind": "build", "isDefault": true },
+            "dependsOn": ["CMake: Configure (Debug)"]
+        },
+        {
+            "label": "Build AU (Release)",
+            "type": "shell",
+            "command": "/opt/homebrew/bin/cmake",
+            "args": ["--build", "build-release", "--target", "hybridrevjo_AU", "-j"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "build",
+            "dependsOn": ["CMake: Configure (Release)"]
+        },
+        {
+            "label": "Build Standalone (Debug)",
+            "type": "shell",
+            "command": "/opt/homebrew/bin/cmake",
+            "args": ["--build", "build", "--target", "hybridrevjo_Standalone", "-j"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "build",
+            "dependsOn": ["CMake: Configure (Debug)"]
+        },
+        {
+            "label": "Build Standalone (Release)",
+            "type": "shell",
+            "command": "/opt/homebrew/bin/cmake",
+            "args": ["--build", "build-release", "--target", "hybridrevjo_Standalone", "-j"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "group": "build",
+            "dependsOn": ["CMake: Configure (Release)"]
+        },
+        {
+            "label": "Build Standalone",
+            "dependsOn": ["Build Standalone (Debug)"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Validate AU",
+            "type": "shell",
+            "command": "auval",
+            "args": ["-v", "aufx", "Hrb2", "LDSP"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "dependsOn": ["Build AU (Debug)"]
+        }
+    ]
+}
