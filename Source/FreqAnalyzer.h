@@ -13,7 +13,7 @@
 */
 
 #pragma once
-#include "SpectrumUtil.h"
+#include "Utility/SpectrumUtil.h"
 // all FFT-related objects in this header has fixed order: fftsize = 2048 (2e11)
 // fft :: 2^N sized fft -- 2^11 = 2048, ~23.4fps
 const uint32_t FFTORDER = 11;

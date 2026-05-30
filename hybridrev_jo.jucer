@@ -25,12 +25,12 @@
     </GROUP>
     <GROUP id="{D871AA6D-03AF-45FF-0961-3E6D48517268}" name="LBD_gui">
       <FILE id="tiWEn8" name="FreqAnalyzer.h" compile="0" resource="0" file="Source/FreqAnalyzer.h"/>
-      <FILE id="mqoyu5" name="SpectrumUtil.h" compile="0" resource="0" file="Source/SpectrumUtil.h"/>
+      <FILE id="mqoyu5" name="SpectrumUtil.h" compile="0" resource="0" file="Source/Utility/SpectrumUtil.h"/>
     </GROUP>
     <GROUP id="{E495BB3A-D468-E30D-F5C5-198ADE85E04A}" name="LBD_dsp">
-      <FILE id="vi3hTZ" name="AmpMod.h" compile="0" resource="0" file="Source/AmpMod.h"/>
+      <FILE id="vi3hTZ" name="AmpMod.h" compile="0" resource="0" file="Source/Utility/AmpMod.h"/>
       <FILE id="F3woCB" name="BiquadCombChannel.h" compile="0" resource="0"
-            file="Source/BiquadCombChannel.h" xcodeResource="0"/>
+            file="Source/Modular/BiquadCombChannel.h" xcodeResource="0"/>
       <FILE id="hEkCCY" name="ConvolutionManager.h" compile="0" resource="0"
             file="Source/ConvolutionManager.h"/>
       <FILE id="gu8Igs" name="DWmixer.h" compile="0" resource="0" file="Source/DWmixer.h"/>
@@ -38,10 +38,10 @@
             file="Source/FilterIntegration.h"/>
       <FILE id="tyGV5n" name="LateReverbManager.h" compile="0" resource="0"
             file="Source/LateReverbManager.h"/>
-      <FILE id="WWrHAb" name="MatrixOps.h" compile="0" resource="0" file="Source/MatrixOps.h"/>
-      <FILE id="MhtHJ8" name="PrimeUtil.h" compile="0" resource="0" file="Source/PrimeUtil.h"/>
+      <FILE id="WWrHAb" name="MatrixOps.h" compile="0" resource="0" file="Source/Utility/MatrixOps.h"/>
+      <FILE id="MhtHJ8" name="PrimeUtil.h" compile="0" resource="0" file="Source/Utility/PrimeUtil.h"/>
       <FILE id="FWTINd" name="SchroederAPLine.h" compile="0" resource="0"
-            file="Source/SchroederAPLine.h"/>
+            file="Source/Modular/SchroederAPLine.h"/>
     </GROUP>
     <GROUP id="{CB5125CB-D144-4860-6544-AD397705556E}" name="Source">
       <FILE id="de210X" name="ParameterManager.cpp" compile="1" resource="0"

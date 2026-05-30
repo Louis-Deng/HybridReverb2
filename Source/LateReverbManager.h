@@ -10,10 +10,10 @@
 
 #pragma once
 
-#include "BiquadCombChannel.h"
-#include "SchroederAPLine.h"
-#include "PrimeUtil.h"
-#include "MatrixOps.h"
+#include "Modular/BiquadCombChannel.h"
+#include "Modular/SchroederAPLine.h"
+#include "Utility/PrimeUtil.h"
+#include "Utility/MatrixOps.h"
 
 #define MATDIM 16   // matrix dimension
 #define APCASC 4    // all-pass filter cascades

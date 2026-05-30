@@ -12,7 +12,7 @@
 */
 
 #pragma once
-#include "AmpMod.h"
+#include "../Utility/AmpMod.h"
 
 /// Parameter struct for LBCF
 struct LBCFParam
