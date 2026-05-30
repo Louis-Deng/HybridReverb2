@@ -40,11 +40,11 @@ juce_generate_juce_header(hybridrevjo)
 
 juce_add_binary_data(hybridrevjoBinaryData
     SOURCES
-        Source/aula.wav
-        Source/lecture.wav
-        Source/meeting.wav
-        Source/office.wav
-        Source/stair.wav
+        Source/IR/aula.wav
+        Source/IR/lecture.wav
+        Source/IR/meeting.wav
+        Source/IR/office.wav
+        Source/IR/stair.wav
 )
 
 target_sources(hybridrevjo

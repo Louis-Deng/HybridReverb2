@@ -11,7 +11,7 @@ Built using JUCE 8.0.1 and Xcode 15.4
 To build for yourself, see JUCE documentation on how to use Projucer. 
 
 
-# Debug and Build using CMake
+# Debug and Build using Cursor and CMake 2.21c
 Debug (development)
 cmake -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build --target hybridrevjo_AU -j
@@ -36,8 +36,6 @@ Output: build-release/hybridrevjo_artefacts/Release/...
 Release AU is also copied to ~/Library/Audio/Plug-Ins/Components/ on build.
 
 Cursor tasks
-In Terminal → Run Task:
-
 Build AU (Debug) — default build task
 Build AU (Release)
 Build Standalone (Debug) / (Release)

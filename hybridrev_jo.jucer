@@ -14,11 +14,13 @@
     </GROUP>
     <GROUP id="{8D74D7EC-7141-0F54-6FE6-78E4AECD1FDA}" name="Resources">
       <GROUP id="{A419C2D6-24E3-71FF-6F3A-EA7DCDB5D508}" name="Audio">
-        <FILE id="T29jvx" name="aula.wav" compile="0" resource="1" file="Source/aula.wav"/>
-        <FILE id="Dt7irG" name="lecture.wav" compile="0" resource="1" file="Source/lecture.wav"/>
-        <FILE id="ikGaRE" name="meeting.wav" compile="0" resource="1" file="Source/meeting.wav"/>
-        <FILE id="QCjWsn" name="office.wav" compile="0" resource="1" file="Source/office.wav"/>
-        <FILE id="bl1qmU" name="stair.wav" compile="0" resource="1" file="Source/stair.wav"/>
+        <GROUP id="{B529D3E7-35F4-82FF-7F4B-FB8EDEC6E619}" name="IR">
+          <FILE id="T29jvx" name="aula.wav" compile="0" resource="1" file="Source/IR/aula.wav"/>
+          <FILE id="Dt7irG" name="lecture.wav" compile="0" resource="1" file="Source/IR/lecture.wav"/>
+          <FILE id="ikGaRE" name="meeting.wav" compile="0" resource="1" file="Source/IR/meeting.wav"/>
+          <FILE id="QCjWsn" name="office.wav" compile="0" resource="1" file="Source/IR/office.wav"/>
+          <FILE id="bl1qmU" name="stair.wav" compile="0" resource="1" file="Source/IR/stair.wav"/>
+        </GROUP>
       </GROUP>
     </GROUP>
     <GROUP id="{D871AA6D-03AF-45FF-0961-3E6D48517268}" name="LBD_gui">
