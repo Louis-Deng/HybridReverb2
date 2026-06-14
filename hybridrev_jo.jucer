@@ -7,7 +7,7 @@
               pluginVST3Category="Fx,Reverb,Stereo" pluginAAXCategory="8,8192"
               pluginVSTCategory="kPlugCategEffect" maxBinaryFileSize="20971520"
               pluginName="Rebirberator 2" pluginCode="Hrb2" pluginManufacturerCode="LDSP"
-              version="2.21" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
+              version="2.3" pluginChannelConfigs="{1,1}, {1,2}, {2,2}">
   <MAINGROUP id="zECeUI" name="hybridrevjo">
     <GROUP id="{A3727F7F-C474-E93B-BF15-FE140D277FBD}" name="MISC">
       <FILE id="tq4FBN" name="README.md" compile="0" resource="1" file="README.md"/>

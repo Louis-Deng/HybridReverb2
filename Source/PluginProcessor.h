@@ -66,10 +66,9 @@ private:
     
     std::shared_ptr< FreqAnalyzer > freqAnalyzer;
     
-    std::unique_ptr<ParameterManager> parameterManager;
-     
     float mSampleRate;
     juce::AudioProcessorValueTreeState parameters;
+    std::unique_ptr<ParameterManager> parameterManager;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HybridrevjoAudioProcessor)
 };

@@ -53,6 +53,9 @@ void ParameterManager::unregisterListeners()
 void ParameterManager::parameterChanged(const juce::String& parameterID, float newValue)
 {
     // Called on audio thread; ensure DSP methods are RT-safe
+    if (! dspReady.load())
+        return;
+
     if (parameterID == "00-allmix")
     {
         if (dwm[0]) dwm[0]->injectProportion(newValue);
@@ -94,6 +97,9 @@ void ParameterManager::parameterChanged(const juce::String& parameterID, float n
 
 void ParameterManager::applyAllParametersToDSP()
 {
+    if (! dspReady.load())
+        return;
+
     const auto mix    = pMix    ? pMix->load()    : 1.0f;
     const auto t60    = pT60    ? pT60->load()    : 3.2f;
     const auto modAmp = pModAmp ? pModAmp->load() : 14.3f;
@@ -110,4 +116,14 @@ void ParameterManager::applyAllParametersToDSP()
     }
 
     if (conMan) conMan->changeIR(menu);
+}
+
+void ParameterManager::setDSPReady(bool shouldBeReady)
+{
+    dspReady.store(shouldBeReady);
+}
+
+bool ParameterManager::isDSPReady() const
+{
+    return dspReady.load();
 }

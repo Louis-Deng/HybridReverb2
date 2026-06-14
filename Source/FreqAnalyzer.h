@@ -77,7 +77,8 @@ private:
 };
 
 /// Channel component - includes dry and wet
-class FreqAnalChannel : public juce::Component
+class FreqAnalChannel : public juce::Component,
+                        private juce::Timer
 {
 public:
     FreqAnalChannel(uint32_t chan)
@@ -104,6 +105,7 @@ public:
         }
          */
         xPos = 15+(int)chan*315;
+        startTimerHz(30);
         
     }
     ~FreqAnalChannel() override
@@ -124,7 +126,7 @@ public:
         if (dryReady && wetReady)
         {
             graphGen();
-            repaint();
+            repaintPending.store(true);
             dryReady = false;
             wetReady = false;
         }
@@ -153,6 +155,7 @@ private:
     // magnitude in dB graph
     std::vector<float> dryMags;
     std::vector<float> wetMags;
+    std::atomic<bool> repaintPending { false };
     
     /// Component bounds (0,0) (0,x) (0,y) (x,y)
     //std::vector<std::vector<int>> bounds = std::vector<std::vector<int>>(4,std::vector<int>(2));
@@ -161,6 +164,12 @@ private:
     void graphGen()
     {
         
+    }
+
+    void timerCallback() override
+    {
+        if (repaintPending.exchange(false))
+            repaint();
     }
     
 };

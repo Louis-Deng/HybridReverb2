@@ -23,6 +23,8 @@ public:
 
     // Apply current values to DSP (call on startup, after SR changes, after state load)
     void applyAllParametersToDSP();
+    void setDSPReady(bool shouldBeReady);
+    bool isDSPReady() const;
 
 private:
     juce::AudioProcessorValueTreeState& apvts;
@@ -40,6 +42,7 @@ private:
     std::atomic<float>* pModAmp = nullptr;   // "03-modamp"
     std::atomic<float>* pModSpd = nullptr;   // "04-modspd"
     std::atomic<float>* pDamp   = nullptr;   // "05-damping"
+    std::atomic<bool> dspReady { false };
 
     void registerListeners();
     void unregisterListeners();

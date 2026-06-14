@@ -1,10 +1,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-//==============================================================================
-// Add definition for parameterManager
-std::unique_ptr<ParameterManager> parameterManager;
-
 HybridrevjoAudioProcessor::HybridrevjoAudioProcessor()
     : mBufferSize(0)
     , mSampleRate(0.0)
@@ -104,6 +100,7 @@ HybridrevjoAudioProcessor::HybridrevjoAudioProcessor()
 
 HybridrevjoAudioProcessor::~HybridrevjoAudioProcessor()
 {
+    parameterManager.reset();
 }
 
 //==============================================================================
@@ -185,13 +182,18 @@ void HybridrevjoAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
     mLatRev[1]->setSamplingRate(sampleRateFloat);
     
     // crucial to set all params after setting sampling rate
-    if (parameterManager) parameterManager->applyAllParametersToDSP();
+    if (parameterManager)
+    {
+        parameterManager->setDSPReady(true);
+        parameterManager->applyAllParametersToDSP();
+    }
 }
 
 void HybridrevjoAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+    if (parameterManager) parameterManager->setDSPReady(false);
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -319,7 +321,8 @@ void HybridrevjoAudioProcessor::setStateInformation (const void* data, int sizeI
         {
             parameters.replaceState (juce::ValueTree::fromXml (*xmlState));
             //DBG("GOT STATE INFO FROM " << "..." << "! ");
-            if (parameterManager) parameterManager->applyAllParametersToDSP();
+            if (parameterManager && parameterManager->isDSPReady())
+                parameterManager->applyAllParametersToDSP();
         }
 }
 
